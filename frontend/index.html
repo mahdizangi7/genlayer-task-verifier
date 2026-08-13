@@ -2,11 +2,273 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GenLayer Task Verifier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #0b1120;
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1e293b;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 24px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 28px;
+        }
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card h2 span {
+            background: #3b82f6;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        .address-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #4ade80;
+            word-break: break-all;
+            margin: 16px 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+        }
+        .btn-outline:hover {
+            background: #1e293b;
+            border-color: #475569;
+        }
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+        }
+        .step-num {
+            background: #1e293b;
+            border: 1px solid #334155;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #38bdf8;
+            flex-shrink: 0;
+        }
+        .methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .method {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <h1>GenLayer AI Task Verifier</h1>
-    <p>This is a simple frontend placeholder. Interact with the contract via GenLayer Studio.</p>
-    <p>Contract methods: create_task ? submit_proof ? verify_task ? get_task</p>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">GenLayer Task Verifier</div>
+            <a href="https://studio.genlayer.com" target="_blank" class="btn btn-outline">Open Studio</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <div class="badge">Intelligent Contract • Live on GenLayer</div>
+            <h1>AI-Verified Task Completion</h1>
+            <p>Create tasks with natural language criteria. Workers submit proof. Decentralized AI consensus decides the outcome.</p>
+        </div>
+
+        <div class="grid">
+            <!-- Contract Info -->
+            <div class="card">
+                <h2><span>1</span> Contract</h2>
+                <p style="color:#94a3b8; margin-bottom:8px;">Deployed Address</p>
+                <div class="address-box">
+                    0x4A59BB444Bc02E8e1587fE36b42AC6cA7A1d3898
+                </div>
+                <div style="display:flex; gap:12px; margin-top:20px;">
+                    <a href="https://studio.genlayer.com" target="_blank" class="btn">Open in Studio</a>
+                    <a href="https://github.com/mahdizangi7/genlayer-task-verifier" target="_blank" class="btn btn-outline">View Code</a>
+                </div>
+            </div>
+
+            <!-- How it works -->
+            <div class="card">
+                <h2><span>2</span> How it works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div>
+                            <strong>create_task</strong><br>
+                            <span style="color:#94a3b8; font-size:0.9rem;">Define title, description & verification criteria</span>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div>
+                            <strong>submit_proof</strong><br>
+                            <span style="color:#94a3b8; font-size:0.9rem;">Worker submits a proof URL</span>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div>
+                            <strong>verify_task</strong><br>
+                            <span style="color:#94a3b8; font-size:0.9rem;">AI + web access + consensus decides</span>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div>
+                            <strong>get_task</strong><br>
+                            <span style="color:#94a3b8; font-size:0.9rem;">Read the final verdict</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methods -->
+        <div class="card">
+            <h2><span>3</span> Available Methods</h2>
+            <div class="methods">
+                <div class="method">create_task</div>
+                <div class="method">submit_proof</div>
+                <div class="method">verify_task</div>
+                <div class="method">get_task</div>
+                <div class="method">get_all_tasks</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Built with Intelligent Contracts on GenLayer
+    </div>
 </body>
 </html>
