@@ -24,3 +24,7 @@ The Intelligent Contract fetches the live webpage and uses decentralized AI cons
 
 ## Contract file
 `contracts/task_verifier.py`
+
+## Deployed Contract
+
+- **Studio / Testnet Address**: `ا0x4A59BB444Bc02E8e1587fE36b42AC6cA7A1d3898`
